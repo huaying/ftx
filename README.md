@@ -1,10 +1,20 @@
 
 ## Getting Started
 
+## .env
+```
+add .env in ftx-api and add your api key and secret:
+API_KEY = "xxx"
+API_SECRET = "xxx"
+
+```
+
 ### api
 ```
-python -m venv ftx-env
-pip install -r requirements.txt
+# go to ftx-api
+python3 -m venv ftx-env
+source ftx-env/bin/activate
+pip3 install -r requirements.txt
 uvicorn main:app
 
 # listen to the port 8000
@@ -12,6 +22,8 @@ uvicorn main:app
 
 ### ui
 ```
+# go to ftx-ui
+yarn install
 yarn build
 yarn start
 
