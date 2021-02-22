@@ -1,0 +1,6 @@
+ftx-api/.env
+ftx-api/__pycache__
+
+ftx-env/
+
+.vscode
