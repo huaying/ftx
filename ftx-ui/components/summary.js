@@ -22,7 +22,6 @@ export default function Summary({ accounts, total }) {
 
   accounts.forEach(account => {
     account.payments.forEach((payment, idx) => {
-      console.log(payment.paymnet)
       if (idx >= totalPayments.length) {
         totalPayments.push({ time: payment.time, payment: payment.payment });
       } else {
