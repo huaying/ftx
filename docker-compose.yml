@@ -4,7 +4,9 @@ services:
     tty: true
     stdin_open: true
     restart: always
-    build: ./ftx-ui/Dockerfile
+    build:
+      context: ./ftx-ui/
+      dockerfile: Dockerfile
     command: ["npm run serve"]
     image: ui
     ports:
@@ -15,7 +17,9 @@ services:
     tty: true
     stdin_open: true
     restart: always
-    build: ./ftx-api/Dockerfile
+    build:
+      context: ./ftx-api/
+      dockerfile: Dockerfile
     command: [ "npm run start" ]
     image: api
     ports:
