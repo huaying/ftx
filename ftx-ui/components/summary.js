@@ -71,8 +71,8 @@ export default function Summary({ accounts, total }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {totalPayments.map((row) => (
-                <TableRow key={row.id}>
+              {totalPayments.map((row, idx) => (
+                <TableRow key={idx}>
                   <TableCell component="th" scope="row">
                     {moment(row.time).format('M/D/YYYY, hh:mm A z')}
                   </TableCell>
