@@ -17,6 +17,10 @@ function getProfit(payments, date) {
   return payments.filter(p => moment(p.time).format('M/D/YYYY') === date).reduce((accu, cur) => accu + cur.payment, 0);
 }
 
+function formattedDollar(num) {
+  return `$${parseFloat(Math.abs(num).toFixed(4)).toLocaleString()}`
+}
+
 export default function Summary({ accounts, total }) {
   const totalPayments = [];
 
@@ -34,6 +38,7 @@ export default function Summary({ accounts, total }) {
   const yesterday = moment().subtract(1, 'days').format('M/D/YYYY');
   const profit = getProfit(totalPayments, today);
   const yesterdayProfit = getProfit(totalPayments, yesterday);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -41,9 +46,9 @@ export default function Summary({ accounts, total }) {
           <Grid item xs={12} sm={6}>
             <Card className={styles.card} variant="outlined">
               <CardContent>
-                <Typography>Total Net USD value ≈ </Typography>
-                <Typography variant="h4">
-                  ${total.toFixed(4)}
+                <Typography component="p">Total Net USD value ≈ </Typography>
+                <Typography component="h2" variant="h4">
+                  {formattedDollar(total)}
                 </Typography>
               </CardContent>
             </Card>
@@ -51,10 +56,10 @@ export default function Summary({ accounts, total }) {
           <Grid item xs={12} sm={6}>
             <Card className={styles.card} variant="outlined">
               <CardContent>
-                <Typography>Profit Yesterday: ${-1 * yesterdayProfit.toFixed(4)}</Typography>
-                <Typography>Profit Today:</Typography>
+                <Typography component="p">Profit Yesterday: {formattedDollar(yesterdayProfit)}</Typography>
+                <Typography component="p">Profit Today:</Typography>
                 <Typography variant="h4">
-                  ${-1 * profit.toFixed(4)}
+                  {formattedDollar(profit)}
                 </Typography>
               </CardContent>
             </Card>

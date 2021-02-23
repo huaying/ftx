@@ -20,11 +20,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -53,7 +49,7 @@ export default function Home({ accounts, total }) {
           )}
         </Tabs>
       </Paper>
-      <TabPanel value={accountValue} index={0}>
+      <TabPanel value={accountValue} index={0} component="div">
         <Summary total={total} accounts={accounts}/>
       </TabPanel>
       {accounts.map((account, idx) =>
