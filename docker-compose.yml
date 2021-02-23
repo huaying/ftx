@@ -20,7 +20,6 @@ services:
     build:
       context: ./ftx-api/
       dockerfile: Dockerfile
-    command: [ "uvicorn main:app" ]
     image: api
     ports:
       - "8000:8000"
