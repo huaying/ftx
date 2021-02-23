@@ -1,5 +1,4 @@
-FROM node:15
-
+FROM node:15-slim
 RUN mkdir -p /ui
 WORKDIR /ui
 COPY ./ /ui
