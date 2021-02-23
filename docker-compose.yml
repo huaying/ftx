@@ -1,0 +1,24 @@
+version: '3'
+services:
+  ui:
+    tty: true
+    stdin_open: true
+    restart: always
+    build: ./ftx-ui/Dockerfile
+    command: ["npm run serve"]
+    image: ui
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+  api:
+    tty: true
+    stdin_open: true
+    restart: always
+    build: ./ftx-api/Dockerfile
+    command: [ "npm run start" ]
+    image: api
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
