@@ -1,25 +1,23 @@
+from tinydb import TinyDB
+import asyncio
 from ftx_client import FtxClient
 from fastapi import FastAPI
+from utils.update_payment import update_payment
 from config import settings
-
-app = FastAPI()
 
 api_key = settings.api_key
 api_secret = settings.api_secret
 
+app = FastAPI()
+
 @app.get("/")
 def read_root():
-    subaccounts = FtxClient(api_key=api_key, api_secret=api_secret).get_subaccounts();
-    account_names = [''] + [s['nickname'] for s in subaccounts]
+    asyncio.run(update_payment())
+    accounts_db = TinyDB(settings.root_dir + '/db/accounts.json')
+    accounts = accounts_db.all()
 
-    accounts = []
-
-    for name in account_names:
-        payments = FtxClient(api_key=api_key, api_secret=api_secret,
-                             subaccount_name=name).get_funding_payments()
-        accounts.append({"name": name, "payments": payments[:48]})
-
-    all_balances = FtxClient(api_key=api_key, api_secret=api_secret).get_all_balances()
+    all_balances = FtxClient(
+        api_key=api_key, api_secret=api_secret).get_all_balances()
 
     all_usd_value = sum(
         balance['usdValue']
