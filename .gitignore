@@ -1,9 +1,8 @@
 ftx-api/.env
 ftx-api/**/__pycache__
+ftx-api/db/*
+!ftx-api/db/.gitkeep
 
 ftx-env/
 
 .vscode
-
-db/*
-!db/.gitkeep

@@ -22,17 +22,18 @@ function formattedDollar(num) {
 }
 
 export default function Summary({ accounts, total }) {
-  const totalPayments = [];
-
+  const paymentMap = {};
   accounts.forEach(account => {
     account.payments.forEach((payment, idx) => {
-      if (idx >= totalPayments.length) {
-        totalPayments.push({ time: payment.time, payment: payment.payment });
+      if (paymentMap[payment.time] === undefined) {
+        paymentMap[payment.time] = { time: payment.time, payment: payment.payment };
       } else {
-        totalPayments[idx].payment += payment.payment;
+        paymentMap[payment.time].payment += payment.payment
       }
-    })
-  })
+    });
+  });
+
+  const totalPayments = Object.values(paymentMap).sort((a, b) => moment(b.time) - moment(a.time)).slice(0, 48);
 
   const today = moment().format('M/D/YYYY');
   const yesterday = moment().subtract(1, 'days').format('M/D/YYYY');
